@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<testsuites>
+<testsuite name="Root Suite" timestamp="2023-11-24T12:24:01" tests="0" file="cypress/e2e/firstTest.spec.ts" time="0.000" failures="0"></testsuite>
+<testsuite name="Test with backend" timestamp="2023-11-24T12:24:01" tests="5" time="14.849" failures="1">
+  
+  <testcase name="Test with backend should verify correct request and response" time="5.239" classname="should verify correct request and response"></testcase>
+  
+  <testcase name="Test with backend should intercept and modify the request" time="0.000" classname="should intercept and modify the request">
+    
+    <failure message="expected 422 to equal 201" type="AssertionError"><![CDATA[AssertionError: expected 422 to equal 201
+    at Context.eval (webpack://angular-realworld/./cypress/e2e/firstTest.spec.ts:32:0)
+
+      + expected - actual
+
+      -422
+      +201]]></failure>
+    
+  </testcase>
+  
+  <testcase name="Test with backend should verify tags are displayed" time="1.115" classname="should verify tags are displayed"></testcase>
+  
+  <testcase name="Test with backend should verify global feed likes count" time="0.977" classname="should verify global feed likes count"></testcase>
+  
+  <testcase name="Test with backend should delete article" time="4.807" classname="should delete article"></testcase>
+  
+</testsuite>
+
+</testsuites>

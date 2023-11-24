@@ -8,7 +8,13 @@
         "build": "ng build",
         "test": "ng test",
         "lint": "eslint --ignore-path .eslintignore --ext .js,.ts",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "prereport": "npm run delete:reports",
+        "delete:reports": "rm -r cypress/results/* || true",
+        "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
+        "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/result.xml",
+        "cypress:run": "npm run prereport && npx cypress run",
+        "cypress:e2e": "start-test start http-get://localhost:4200 cypress:run; npm run junit:merge; npm run mochawesome:merge"
     },
     "engines": {
         "node": "^14.20.0 || ^16.13.0 || ^18.10.0"
@@ -40,15 +46,22 @@
         "@types/jasmine": "~4.3.0",
         "@types/marked": "^4.0.8",
         "cypress": "^13.6.0",
+        "cypress-multi-reporters": "^1.6.4",
         "husky": "^8.0.3",
         "jasmine-core": "~4.5.0",
+        "junit-merge": "^2.0.0",
         "karma": "~6.4.1",
         "karma-chrome-launcher": "~3.1.0",
         "karma-coverage": "~2.2.0",
         "karma-jasmine": "~5.1.0",
         "karma-jasmine-html-reporter": "~2.0.0",
         "lint-staged": "^13.2.2",
+        "mocha-junit-reporter": "^2.2.1",
+        "mochawesome": "^7.1.3",
+        "mochawesome-merge": "^4.3.0",
+        "mochawesome-report-generator": "^6.2.0",
         "prettier": "^3.1.0",
+        "start-server-and-test": "^2.0.3",
         "typescript": "~5.1.6"
     },
     "lint-staged": {

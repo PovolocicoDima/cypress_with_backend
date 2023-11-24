@@ -13,10 +13,28 @@ export {}
 //
 // -- This is a parent command --
 Cypress.Commands.add('loginToApplication', () => {
-    cy.visit('/login')
-    cy.get('[placeholder="Email"]').clear().type('dima@test.com')
-    cy.get('[placeholder="Password"]').clear().type('cypresstest')
-    cy.get('form').submit()
+    const userCredentials = {
+        user: {
+            email: 'dima@test.com',
+            password: 'cypresstest',
+        },
+    }
+
+    cy.request(
+        'POST',
+        'https://conduit.productionready.io/api/users/login',
+        userCredentials,
+    )
+        .its('body')
+        .then(body => {
+            const token = body.user.token
+            cy.wrap(token).as('token')
+            cy.visit('/', {
+                onBeforeLoad(win) {
+                    win.localStorage.setItem('jwtToken', token)
+                },
+            })
+        })
 })
 //
 //
